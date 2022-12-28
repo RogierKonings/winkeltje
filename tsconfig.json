@@ -9,13 +9,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "target": "ES5",
+    "module": "CommonJS",
+    "lib": ["ES6", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
   },
-  "include": ["src/components", "src/custom.d.ts"],
+  "include": ["src/components", "src/assets", "src/routes", "src/utils", "src/custom.d.ts"],
   "exclude": ["node_modules", "tmp"]
 }
