@@ -1,12 +1,17 @@
 import * as React from 'react'
+import {Category} from '../../types/category.types'
 import CategoryItem from '../category-item/category-item.component'
 
 import './directory.styles.scss'
 
-const Directory = ({categories}: any) => {
+type Props = {
+  categories: Category[]
+}
+
+const Directory = ({categories}: Props) => {
   return (
     <div className="directory-container">
-      {categories.map((category: any) => (
+      {categories.map((category) => (
         <CategoryItem key={category.id} category={category} />
       ))}
     </div>

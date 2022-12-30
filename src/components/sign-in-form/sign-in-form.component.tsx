@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {getErrorMessage} from 'src/utils/firebase/firebase-error.utils'
 import {
   createUserDocumentFromAuth,
@@ -8,8 +8,10 @@ import {
 } from 'src/utils/firebase/firebase.utils'
 import Button from '../button/button.component'
 import FormInput from '../form-input/form-input.component'
+import {UserContext} from '../../context/user.context'
 
 import './sign-in-form.styles.scss'
+import {UserCredential} from 'firebase/auth'
 
 const defaultFormFields = {
   email: '',
@@ -19,6 +21,8 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const {email, password} = formFields
+
+  const {setCurrentUser} = useContext(UserContext)
 
   const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
     const {name, value} = event.target as any
@@ -39,7 +43,9 @@ const SignInForm = () => {
     event.preventDefault()
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password)
+      const user = (await signInAuthUserWithEmailAndPassword(email, password)) as UserCredential
+      setCurrentUser(user)
+
       resetFormFields()
     } catch (error) {
       alert(getErrorMessage(error.code))

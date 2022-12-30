@@ -1,7 +1,13 @@
 import * as React from 'react'
 import './category-item.styles.scss'
 
-const CategoryItem = ({category}: any) => {
+import {Category} from '../../types/category.types'
+
+type Props = {
+  category: Category
+}
+
+const CategoryItem = ({category}: Props) => {
   const {imageUrl, title} = category
   return (
     <div className="category-container">
