@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {useState} from 'react'
+import {getErrorMessage} from 'src/utils/firebase/firebase-error.utils'
 import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
@@ -31,16 +32,18 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     const {user} = await signInWithGooglePopup()
-    const userDocRef = await createUserDocumentFromAuth(user)
+    await createUserDocumentFromAuth(user)
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password)
+      await signInAuthUserWithEmailAndPassword(email, password)
       resetFormFields()
-    } catch (error) {}
+    } catch (error) {
+      alert(getErrorMessage(error.code))
+    }
   }
 
   return (
@@ -52,8 +55,7 @@ const SignInForm = () => {
         <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-
-          <Button onClick={signInWithGoogle} buttonType="google">
+          <Button type="button" onClick={signInWithGoogle} buttonType="google">
             Google Sign In
           </Button>
         </div>
