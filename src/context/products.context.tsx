@@ -13,7 +13,7 @@ export const ProductsContext = createContext({
 })
 
 export const ProductsProvider = ({children}: Props) => {
-  const [products, setProducts] = useState(PRODUCTS)
+  const [products, setProducts] = useState<Product[]>(PRODUCTS)
   const value = {products}
 
   return <ProductsContext.Provider value={value as any}>{children}</ProductsContext.Provider>

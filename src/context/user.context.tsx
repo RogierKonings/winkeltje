@@ -13,7 +13,7 @@ export const UserContext = createContext({
 })
 
 export const UserProvider = ({children}: Props) => {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState<User | null>(null)
   const value = {currentUser, setCurrentUser}
 
   useEffect(() => {
