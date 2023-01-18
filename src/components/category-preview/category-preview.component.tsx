@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {Link} from 'react-router-dom'
 import {Product} from 'src/types/product.types'
 import ProductCard from '../product-card/product-card.component'
 
@@ -8,7 +9,9 @@ const CategoryPreview = ({title, products}: {title: string; products: Product[]}
   return (
     <div className="category-preview-container">
       <h2>
-        <span className="title">{title.toUpperCase()}</span>
+        <Link className="title" to={title}>
+          {title.toUpperCase()}
+        </Link>
       </h2>
       <div className="preview">
         {products
