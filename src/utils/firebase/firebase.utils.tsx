@@ -22,8 +22,7 @@ const firebaseConfig = {
   measurementId: 'G-FG9EFTC7VH'
 }
 
-const app = initializeApp(firebaseConfig)
-const analytics = getAnalytics(app)
+initializeApp(firebaseConfig)
 
 const googleProvider = new GoogleAuthProvider()
 googleProvider.setCustomParameters({

@@ -1,8 +1,6 @@
 import * as React from 'react'
 import {BaseButton, GoogleSignInButton, InvertedButton} from './button.styles'
 
-type ButtonType = 'google' | 'inverted'
-
 export const BUTTON_TYPE_CLASSES = {
   base: 'base',
   google: 'google-sign-in',
