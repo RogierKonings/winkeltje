@@ -1,7 +1,7 @@
 import * as React from 'react'
-import './directory-item.styles.scss'
 
 import {Category} from '../../types/category.types'
+import {BackgroundImage, Body, DirectoryItemContainer} from './directory-item.styles'
 
 type Props = {
   category: Category
@@ -10,13 +10,13 @@ type Props = {
 const DirectoryItem = ({category}: Props) => {
   const {imageUrl, title} = category
   return (
-    <div className="directory-item-container">
-      <div className="background-image" style={{backgroundImage: `url(${imageUrl})`}} />
-      <div className="directory-item-body-container">
+    <DirectoryItemContainer>
+      <BackgroundImage imageUrl={imageUrl} />
+      <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>
-      </div>
-    </div>
+      </Body>
+    </DirectoryItemContainer>
   )
 }
 

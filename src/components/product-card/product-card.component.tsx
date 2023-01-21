@@ -4,9 +4,8 @@ import {useContext} from 'react'
 import {CartContext} from '../../context/cart.context'
 
 import {Product} from '../../types/product.types'
-import Button from '../button/button.component'
-
-import './product-card.styles.scss'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
+import {Footer, Name, Price, ProductCartContainer} from './product-card.styles'
 
 type Props = {
   product: Product
@@ -19,16 +18,16 @@ const ProductCard = ({product}: Props) => {
   const addProductToCart = () => addItemToCart(product)
 
   return (
-    <div className="product-card-container">
+    <ProductCartContainer>
       <img src={imageUrl} alt={`${name}`} />
-      <div className="footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
-      <Button buttonType="inverted" onClick={addProductToCart}>
+      <Footer>
+        <Name>{name}</Name>
+        <Price>{price}</Price>
+      </Footer>
+      <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addProductToCart}>
         Add to card
       </Button>
-    </div>
+    </ProductCartContainer>
   )
 }
 

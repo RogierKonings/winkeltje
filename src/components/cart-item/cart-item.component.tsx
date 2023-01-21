@@ -1,8 +1,7 @@
 import * as React from 'react'
 
 import {CartProduct} from '../../types/product.types'
-
-import './cart-item.styles.scss'
+import {CartItemContainer, Details, Image, Name, Price} from './cart-item.styles'
 
 type Props = {
   cartItem: CartProduct
@@ -11,15 +10,15 @@ type Props = {
 const CartItem = ({cartItem}: Props) => {
   const {name, imageUrl, price, quantity} = cartItem
   return (
-    <div className="cart-item-container">
-      <img src={imageUrl} alt={`${name}`} />
-      <div className="item-details">
-        <span className="name">{name}</span>
-        <span className="price">
+    <CartItemContainer>
+      <Image src={imageUrl} alt={`${name}`} />
+      <Details>
+        <Name>{name}</Name>
+        <Price>
           {quantity} x ${price}
-        </span>
-      </div>
-    </div>
+        </Price>
+      </Details>
+    </CartItemContainer>
   )
 }
 

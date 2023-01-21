@@ -5,8 +5,7 @@ import {getErrorMessage} from 'src/utils/firebase/firebase-error.utils'
 import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from 'src/utils/firebase/firebase.utils'
 import Button from '../button/button.component'
 import FormInput from '../form-input/form-input.component'
-
-import './sign-up-form.styles.scss'
+import {Header, SignUpContainer} from './sign-up-form.styles'
 
 const defaultFormFields = {
   displayName: '',
@@ -47,8 +46,8 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="sign-up-container">
-      <h2>Don't have an account?</h2>
+    <SignUpContainer>
+      <Header>Don't have an account?</Header>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -71,7 +70,7 @@ const SignUpForm = () => {
         />
         <Button type="submit">SIGN UP</Button>
       </form>
-    </div>
+    </SignUpContainer>
   )
 }
 
