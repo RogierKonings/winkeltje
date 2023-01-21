@@ -4,8 +4,15 @@ import {useContext} from 'react'
 import {CartContext} from '../../context/cart.context'
 
 import {CartProduct} from '../../types/product.types'
-import {Name, Price} from '../cart-item/cart-item.styles'
-import {Arrow, CheckoutItemContainer, ImageContainer, Quantity, RemoveButton, Value} from './checkout-item.styles'
+import {
+  Arrow,
+  BaseSpan,
+  CheckoutItemContainer,
+  ImageContainer,
+  Quantity,
+  RemoveButton,
+  Value
+} from './checkout-item.styles'
 
 type Props = {
   cartItem: CartProduct
@@ -27,13 +34,13 @@ const CheckoutItem = ({cartItem}: Props) => {
       <ImageContainer>
         <img src={imageUrl} alt={`${name}`} />
       </ImageContainer>
-      <Name>{name}</Name>
+      <BaseSpan> {name} </BaseSpan>
       <Quantity>
         <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
         <Value>{quantity}</Value>
         <Arrow onClick={addItemHandler}>&#10095;</Arrow>
       </Quantity>
-      <Price>{price}</Price>
+      <BaseSpan> {price}</BaseSpan>
       <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
   )
