@@ -1,27 +1,28 @@
 import {createRoot} from 'react-dom/client'
 import './index.scss'
 import App from './App'
-import {UserProvider} from './context/user.context'
 import {CategoriesProvider} from './context/categories.context'
 import {CartProvider} from './context/cart.context'
 import reportWebVitals from './reportWebVitals'
 import {BrowserRouter} from 'react-router-dom'
 import * as React from 'react'
+import {Provider} from 'react-redux'
+import {store} from './store/store'
 
 const container = document.getElementById('root')
 const root = createRoot(container as Element)
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
+    <Provider store={store}>
+      <BrowserRouter>
         <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
         </CategoriesProvider>
-      </UserProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 )
 

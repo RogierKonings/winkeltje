@@ -22,6 +22,15 @@
     "noImplicitAny": true,
     "strictNullChecks": true
   },
-  "include": ["src/components", "src/assets", "src/routes", "src/utils", "src/context", "src/types", "src/custom.d.ts"],
+  "include": [
+    "src/components",
+    "src/assets",
+    "src/routes",
+    "src/utils",
+    "src/context",
+    "src/types",
+    "src/store",
+    "src/custom.d.ts"
+  ],
   "exclude": ["node_modules", "tmp"]
 }
