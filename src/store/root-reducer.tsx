@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux'
-import {userReducer} from './user/user.reducer'
-import {UserState} from './user/user.types'
+import {categoriesReducer, CategoriesState} from './categories/category.reducer'
+import {userReducer, UserState} from './user/user.reducer'
 
 export interface RootState {
   user: UserState
+  categories: CategoriesState
 }
 
 export const rootReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  categories: categoriesReducer
 })

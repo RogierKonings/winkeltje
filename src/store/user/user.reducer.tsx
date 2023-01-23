@@ -1,12 +1,16 @@
 import {PayloadAction} from '@reduxjs/toolkit'
 import {User} from 'firebase/auth'
-import {UserState, USER_ACTION_TYPES} from './user.types'
+import {USER_ACTION_TYPES} from './user.types'
 
-const INITIAL_STATE: UserState = {
+export interface UserState {
+  currentUser: User | null
+}
+
+const USER_INITIAL_STATE: UserState = {
   currentUser: null
 }
 
-export const userReducer = (state = INITIAL_STATE, action: PayloadAction<User | null>) => {
+export const userReducer = (state = USER_INITIAL_STATE, action: PayloadAction<User | null>) => {
   const {type, payload} = action
 
   switch (type) {
