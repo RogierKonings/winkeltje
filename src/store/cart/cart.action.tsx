@@ -18,7 +18,7 @@ export const clearItemFromCart = (cartItems: CartProduct[], cartItemToRemove: Ca
 }
 
 const addCartItem = (cartItems: CartProduct[], productToAdd: Product): CartProduct[] => {
-  const existingCartItem = cartItems.find((cartitem) => cartitem.id === productToAdd.id)
+  const existingCartItem = cartItems.find((cartItem) => cartItem.id === productToAdd.id)
 
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
