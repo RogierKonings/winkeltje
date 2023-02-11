@@ -1,4 +1,10 @@
-import {createAction} from 'src/utils/reducer/reducer.utils'
 import {CATEGORIES_ACTION_TYPE} from './category.types'
+import {createAction} from '../../utils/reducer/reducer.utils'
 
-export const setCategories = (categories: any[]) => createAction(CATEGORIES_ACTION_TYPE.SET_CATEGORIES, categories)
+export const fetchCategoriesStart = () => createAction(CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_START)
+
+export const fetchCategoriesSuccess = (categoriesArray: any) =>
+  createAction(CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_SUCCESS, categoriesArray)
+
+export const fetchCategoriesFailed = (error: string) =>
+  createAction(CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_FAILED, error)

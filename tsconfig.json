@@ -30,6 +30,7 @@
     "src/context",
     "src/types",
     "src/store",
+    "src/hooks",
     "src/custom.d.ts"
   ],
   "exclude": ["node_modules", "tmp"]

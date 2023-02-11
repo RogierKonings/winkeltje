@@ -46,8 +46,8 @@ export const addCollectionAndDocuments = async (collectionKey: string, objectsTo
   await batch.commit()
 }
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, 'categories')
+export const getCategoriesAndDocuments = async (type: string) => {
+  const collectionRef = collection(db, type)
   const q = query(collectionRef)
 
   const querySnapshot = await getDocs(q)
@@ -98,3 +98,16 @@ export const signInAuthUserWithEmailAndPassword = async (email: string, password
 export const signOutUser = async () => signOut(auth)
 
 export const onAuthStateChangedListener = (callback: any) => onAuthStateChanged(auth, callback)
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe()
+        resolve(userAuth)
+      },
+      reject
+    )
+  })
+}

@@ -1,21 +1,41 @@
-import {configureStore} from '@reduxjs/toolkit'
-import {persistReducer, persistStore} from 'redux-persist'
+import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import {loggerMiddleWare} from './middleware/logger'
+import {setupListeners} from '@reduxjs/toolkit/query'
+import {configureStore} from '@reduxjs/toolkit'
+
 import {rootReducer} from './root-reducer'
+import {loggerMiddleware} from './middleware/logger'
+import createSagaMiddleware from '@redux-saga/core'
+import {rootSaga} from './root-saga'
+import logger from 'redux-logger'
+
+const sagaMiddleware = createSagaMiddleware()
+
+const middleWares = [process.env.NODE_ENV === 'development' && logger, sagaMiddleware].filter(Boolean)
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['user']
+  whitelist: ['cart']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-const enhancer = process.env.NODE_ENV !== 'production' && window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+      thunk: false
+    }).concat(middleWares as any)
+})
 
-const middleWares = [process.env.NODE_ENV !== 'production' && loggerMiddleWare].filter(Boolean)
-
-export const store = configureStore({reducer: persistedReducer, middleware: middleWares as any, enhancers: enhancer})
+sagaMiddleware.run(rootSaga)
 
 export const persistor = persistStore(store)
+
+setupListeners(store.dispatch)
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
