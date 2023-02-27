@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {emailSignInStart, googleSignInStart} from 'src/store/user/user.action'
+import {emailSignInStart, googleSignInStart} from 'src/store/user/user.reducer'
 import {getErrorMessage} from 'src/utils/firebase/firebase-error.utils'
 import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
 import FormInput from '../form-input/form-input.component'
@@ -35,7 +35,7 @@ const SignInForm = () => {
     event.preventDefault()
 
     try {
-      dispatch(emailSignInStart(email, password))
+      dispatch(emailSignInStart({email, password}))
       resetFormFields()
     } catch (error) {
       alert(getErrorMessage(error.code))

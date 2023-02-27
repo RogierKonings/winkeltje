@@ -25,8 +25,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
-      thunk: false
+      serializableCheck: false
     }).concat(middleWares as any)
 })
 

@@ -7,8 +7,19 @@ import {
   signInWithGooglePopup,
   signOutUser
 } from 'src/utils/firebase/firebase.utils'
-import {signInFailed, signInSuccess, signOutFailed, signOutSuccess, signUpFailed, signUpSuccess} from './user.action'
-import {USER_ACTION_TYPES} from './user.types'
+import {
+  checkUserSession,
+  emailSignInStart,
+  googleSignInStart,
+  signInFailed,
+  signInSuccess,
+  signOutFailed,
+  signOutStart,
+  signOutSuccess,
+  signUpFailed,
+  signUpStart,
+  signUpSuccess
+} from './user.reducer'
 
 export function* getSnapshopFromUserAuth(userAuth: any, additionalDetails: any) {
   try {
@@ -52,7 +63,7 @@ export function* isUserAuthenticated() {
 export function* signUp({payload: {email, password, displayName}}: any) {
   try {
     const {user} = yield call(createAuthUserWithEmailAndPassword, email, password)
-    yield put(signUpSuccess(user, {displayName}))
+    yield put(signUpSuccess({user, displayName}))
   } catch (error: any) {
     yield put(signUpFailed(error))
   }
@@ -72,27 +83,27 @@ export function* signInAfterSignUp({payload: {user, additionalDetails}}: any) {
 }
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle)
+  yield takeLatest(googleSignInStart, signInWithGoogle)
 }
 
 export function* onCheckUserSession() {
-  yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated)
+  yield takeLatest(checkUserSession, isUserAuthenticated)
 }
 
 export function* onEmailSignInStart() {
-  yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail)
+  yield takeLatest(emailSignInStart, signInWithEmail)
 }
 
 export function* onSignUpStart() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp)
+  yield takeLatest(signUpStart, signUp)
 }
 
 export function* onSignUpSuccess() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp)
+  yield takeLatest(signUpSuccess, signInAfterSignUp)
 }
 
 export function* onSignOutStart() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut)
+  yield takeLatest(signOutStart, signOut)
 }
 
 export function* userSagas() {

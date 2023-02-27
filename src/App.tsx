@@ -7,7 +7,7 @@ import Authentication from './routes/authentication/authentication.component'
 import Checkout from './routes/checkout/checkout.component'
 import {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import {checkUserSession} from './store/user/user.action'
+import {checkUserSession} from './store/user/user.reducer'
 
 const App = () => {
   const dispatch = useDispatch<any>()

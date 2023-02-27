@@ -9,7 +9,7 @@ import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
 import {selectCurrentUser} from 'src/store/user/user.selector'
 import {selectIsCartOpen} from 'src/store/cart/cart.selector'
-import {signOutStart} from 'src/store/user/user.action'
+import {signOutStart} from 'src/store/user/user.reducer'
 
 const Navigation = () => {
   const dispatch = useDispatch()

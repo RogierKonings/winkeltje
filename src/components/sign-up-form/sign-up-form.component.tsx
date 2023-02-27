@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {signUpStart} from 'src/store/user/user.action'
+import {signUpStart} from 'src/store/user/user.reducer'
 import {getErrorMessage} from 'src/utils/firebase/firebase-error.utils'
 import Button from '../button/button.component'
 import FormInput from '../form-input/form-input.component'
@@ -32,7 +32,7 @@ const SignUpForm = () => {
     }
 
     try {
-      dispatch(signUpStart(email, password, displayName))
+      dispatch(signUpStart({email, password, displayName}))
       resetFormFields()
     } catch (error) {
       alert(getErrorMessage(error.code))

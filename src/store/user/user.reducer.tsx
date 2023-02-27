@@ -1,6 +1,5 @@
-import {PayloadAction} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import {User} from 'firebase/auth'
-import {USER_ACTION_TYPES} from './user.types'
 
 export interface UserState {
   currentUser: User | null
@@ -14,19 +13,46 @@ const USER_INITIAL_STATE: UserState = {
   error: null
 }
 
-export const userReducer = (state = USER_INITIAL_STATE, action: PayloadAction<User | null>) => {
-  const {type, payload} = action
-
-  switch (type) {
-    case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
-      return {...state, currentUser: payload}
-    case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
-      return {...state, currentUser: null}
-    case USER_ACTION_TYPES.SIGN_OUT_FAILED:
-    case USER_ACTION_TYPES.SIGN_IN_FAILED:
-    case USER_ACTION_TYPES.SIGN_UP_FAILED:
-      return {...state, error: payload}
-    default:
-      return state
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: USER_INITIAL_STATE,
+  reducers: {
+    googleSignInStart() {},
+    emailSignInStart(state, action) {},
+    signInSuccess(state, action) {
+      state.currentUser = action.payload
+    },
+    signInFailed(state, action) {
+      state.error = action.payload
+    },
+    signOutStart() {},
+    signOutSuccess(state) {
+      state.currentUser = null
+    },
+    signOutFailed(state, action) {
+      state.error = action.payload
+    },
+    signUpStart(state, action) {},
+    signUpSuccess(state, action) {},
+    signUpFailed(state, action) {
+      state.error = action.payload
+    },
+    checkUserSession() {}
   }
-}
+})
+
+export const {
+  googleSignInStart,
+  emailSignInStart,
+  signInSuccess,
+  signInFailed,
+  signOutStart,
+  signOutSuccess,
+  signOutFailed,
+  signUpStart,
+  signUpSuccess,
+  signUpFailed,
+  checkUserSession
+} = userSlice.actions
+
+export const userReducer = userSlice.reducer
