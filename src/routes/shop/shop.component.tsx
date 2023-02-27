@@ -2,7 +2,7 @@ import * as React from 'react'
 import {useEffect} from 'react'
 import {Route, Routes} from 'react-router-dom'
 import {useAppDispatch} from 'src/hooks/hooks'
-import {fetchCategoriesStart} from 'src/store/categories/category.action'
+import {fetchCategoriesStart} from 'src/store/categories/category.reducer'
 import CategoriesPreview from '../categories-preview/categories-preview.component'
 import Category from '../category/category.component'
 

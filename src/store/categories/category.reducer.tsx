@@ -1,5 +1,4 @@
-import {PayloadAction} from '@reduxjs/toolkit'
-import {CATEGORIES_ACTION_TYPE} from './category.types'
+import {createSlice} from '@reduxjs/toolkit'
 
 export interface CategoriesState {
   categories: any
@@ -13,20 +12,24 @@ export const CATEGORIES_INITIAL_STATE: CategoriesState = {
   error: null
 }
 
-export const categoriesReducer = (
-  state = CATEGORIES_INITIAL_STATE,
-  action: PayloadAction<any> | Record<string, never> = {}
-) => {
-  const {type, payload} = action
-
-  switch (type) {
-    case CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_START:
-      return {...state, isLoading: true}
-    case CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_SUCCESS:
-      return {...state, categories: payload, isLoading: false}
-    case CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_FAILED:
-      return {...state, error: payload, isLoading: false}
-    default:
-      return state
+export const categoriesSlice = createSlice({
+  name: 'category',
+  initialState: CATEGORIES_INITIAL_STATE,
+  reducers: {
+    fetchCategoriesStart(state) {
+      state.isLoading = true
+    },
+    fetchCategoriesSuccess(state, action) {
+      state.categories = action.payload
+      state.isLoading = false
+    },
+    fetchCategoriesFailed(state, action) {
+      state.error = action.payload
+      state.isLoading = false
+    }
   }
-}
+})
+
+export const {fetchCategoriesStart, fetchCategoriesSuccess, fetchCategoriesFailed} = categoriesSlice.actions
+
+export const categoriesReducer = categoriesSlice.reducer
