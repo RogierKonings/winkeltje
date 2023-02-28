@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {setIsCartOpen} from 'src/store/cart/cart.action'
+import {setCartIsOpen} from 'src/store/cart/cart.reducer'
 import {selectCartCount, selectIsCartOpen} from 'src/store/cart/cart.selector'
 
 import {CartIconContainer, ItemCount, ShoppingIcon} from './cart-icon.styles'
@@ -13,7 +13,7 @@ const CartIcon = () => {
 
   const isCartOpen = useSelector(selectIsCartOpen)
 
-  const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen))
+  const toggleIsCartOpen = () => dispatch(setCartIsOpen(!isCartOpen))
 
   return (
     <CartIconContainer onClick={toggleIsCartOpen}>

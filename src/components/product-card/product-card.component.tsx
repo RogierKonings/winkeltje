@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addItemToCart} from 'src/store/cart/cart.action'
+import {addItemToCart} from 'src/store/cart/cart.reducer'
 import {selectCartItems} from 'src/store/cart/cart.selector'
 
 import {Product} from '../../types/product.types'
@@ -17,7 +17,7 @@ const ProductCard = ({product}: Props) => {
 
   const cartItems = useSelector(selectCartItems)
 
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product))
+  const addProductToCart = () => dispatch(addItemToCart(product))
 
   return (
     <ProductCartContainer>
